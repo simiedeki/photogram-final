@@ -45,4 +45,5 @@ source: :fan
 def fan_list
   fans.pluck(:username).to_sentence  # Efficiently fetches usernames and converts them to a formatted string
 end
+
 end

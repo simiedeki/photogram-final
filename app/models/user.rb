@@ -51,6 +51,11 @@ class User < ApplicationRecord
 
   has_many :feed, through: :leaders, source: :own_photos
   has_many :discover, through: :leaders, source: :liked_photos
-
+  def following?(other_user)
+    leaders.include?(other_user)
+  end
+  def pending_follow_request?(other_user)
+    sent_follow_requests.exists?(recipient_id: other_user.id, status: 'pending')
+  end
   # Methods to manage data extraction are no longer needed as Rails handles these associations directly.
 end

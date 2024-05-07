@@ -1,0 +1,7 @@
+<% @incoming_requests.each do |request| %>
+  <p>
+    <%= request.sender.username %> wants to follow you.
+    <%= button_to 'Accept', follow_request_path(request, accept: true), method: :patch %>
+    <%= button_to 'Decline', follow_request_path(request, accept: false), method: :delete %>
+  </p>
+<% end %>

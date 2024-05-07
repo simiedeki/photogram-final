@@ -28,7 +28,7 @@
     Posted
   </dt>
   <dd>
-    <%= @the_photo.created_at %>
+   <%= time_ago_in_words(@the_photo.created_at) %> ago
   </dd>
 
   <dt>

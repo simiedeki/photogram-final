@@ -30,7 +30,9 @@
     <th>
       Posted
     </th>
-
+  <th>
+     Likes
+    </th>
     <th>
     </th>
   </tr>
@@ -51,9 +53,11 @@
       </td>
 
       <td>
-        <%= a_photo.created_at %>
+       <%= time_ago_in_words(a_photo.created_at) %> ago
       </td>
-
+   <td>
+       <%= a_photo.likes.count %>
+      </td>
       <td>
         <a href="/photos/<%= a_photo.id %>">
           Show details
