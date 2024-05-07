@@ -83,7 +83,8 @@ gem "http"
 gem "sqlite3", "~> 1.4"
 gem "table_print"
 gem "simple_form" # necessary for devise view templates
-
+gem "carrierwave"
+gem "cloudinary"
 group :development do
   gem "annotate"
   gem "better_errors"
