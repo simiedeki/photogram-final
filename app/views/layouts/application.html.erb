@@ -2,10 +2,33 @@
 <html>
   <head>
     <title>Photogram Final</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <% if user_signed_in? %>
+  <strong>Hello, <%= current_user.email %></strong>
+  <%= link_to 'Sign out', destroy_user_session_path %>
+<% else %>
+  <%= link_to 'Sign in', new_user_session_path %>
+  <%= link_to 'Sign up', new_user_registration_path %>
+<% end %>
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <li>
+          <a href="/users">All Users</a>
+        </li>
+        <li>
+          <a href="/photos">All Public Photos</a>
+        </li>
+      </ul>
+    </nav>
+
     <%= yield %>
+
+    <% flash.each do |key, message| %>
+  <div class="<%= key %>"><%= message %></div>
+<% end %>
   </body>
 </html>

@@ -1,0 +1,64 @@
+<h1><%= @the_user.username %></h1>
+
+<dl>
+  <dt>
+    ID
+  </dt>
+  <dd>
+    <%= @the_user.id %>
+  </dd>
+
+  
+</dl>
+
+<h2>Own photos (<%= @the_user.own_photos.count %>)</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @the_user.own_photos.each do |a_photo| %>
+
+    <tr>
+      <td>
+        <img src=<%= a_photo.image %>>
+      </td>
+
+      <td>
+        <%= a_photo.poster.username %>
+      </td>
+
+      <td>
+        <%= a_photo.caption %>
+      </td>
+
+      <td>
+        <%= a_photo.created_at %>
+      </td>
+
+      <td>
+        <a href="/photos/<%= a_photo.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <% end %>
+</table>
