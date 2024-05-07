@@ -3,28 +3,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show]
  
   
-  def follow
-    # Prevent users from following themselves
-    if @user == current_user
-      redirect_back(fallback_location: root_path, alert: "You cannot follow yourself.")
-      return
-    end
 
-    # Check if already following or if a request is pending
-    if current_user.following?(@user) || current_user.pending_follow_request?(@user)
-      redirect_back(fallback_location: root_path, alert: "Already following or request pending.")
-      return
-    end
-
-    # Create a follow request or follow directly
-    follow_request = current_user.sent_follow_requests.new(recipient_id: @user.id, status: 'pending')  # or 'accepted' if instant follow
-    if follow_request.save
-      message = @user.private ? 'Follow request sent.' : 'Now following.'
-      redirect_to users_path, notice: message
-    else
-      redirect_to users_path, alert: "Unable to send follow request."
-    end
-  end
 
   def index
     @list_of_users = User.all.order(username: :asc)

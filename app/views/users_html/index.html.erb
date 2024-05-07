@@ -30,17 +30,25 @@
        <td>
       <%= a_user.private ? 'Yes' : 'No' %>
       </td>
-     <td>
-          <% if user_signed_in? && a_user != current_user %>
-            <% if current_user.following?(a_user) %>
-              <%= button_to 'Unfollow', unfollow_user_path(a_user), method: :de %>
-            <% elsif current_user.pending_follow_request?(a_user) %>
-              <span>Request Sent</span>
-            <% else %>
-              <%= button_to 'Follow', follow_user_path(a_user), method: :post %>
+
+    
+  
+    <td>
+   <% if user_signed_in? && a_user != current_user %>
+          <% follow_request = FollowRequest.find_by(recipient_id: a_user.id, sender_id: current_user.id) %>
+          <% if follow_request.nil? || follow_request.status.nil? || follow_request.status == 'rejected' %>
+            <%= form_tag("/insert_follow_request", method: "post") do %>
+              <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
+              <button type="submit">Follow</button>
             <% end %>
+          <% elsif follow_request.status == 'pending' %>
+            <%= link_to 'Cancel Request', "/delete_follow_request/#{follow_request.id}", method: :get %>
+          <% elsif follow_request.status == 'accepted' %>
+            <%= link_to 'Unfollow', "/delete_follow_request/#{follow_request.id}", method: :get %>
+              <% else %>
           <% end %>
-        </td>
+        <% end %>
+    </td>
 
       <td>
         <a href="/users/<%= a_user.username %>">

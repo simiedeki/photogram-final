@@ -12,13 +12,8 @@ Rails.application.routes.draw do
   post("/insert_photo_record", controller: "photos", action: "create")
   post("/update_photo/:photo_id", controller: "photos", action: "update")
   post("/add_comment", controller: "photos", action: "comment")
+  post("/insert_follow_request/", controller:"followrequests", action:"create")
 post("/users/:id/follow", controller: "users", action: "follow")
-resources :users do
-    member do
-      post 'follow'
-      delete 'unfollow'
-    end
-  end
-  resources :follow_requests, only: [:index, :update, :destroy]
+post "delete_follow_request", to: "followrequests#delete"
 
 end

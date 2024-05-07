@@ -1,5 +1,5 @@
 <h1>Photo Details</h1>
-
+  before_action :authenticate_user!, only: [:show]
 <dl>
   <dt>
     Image
