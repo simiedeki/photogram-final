@@ -25,8 +25,7 @@ class FollowRequestsController < ApplicationController
       redirect_to users_path, alert: "Failed to send follow request."
     end
    
-    
-   
+ 
   end
 
 

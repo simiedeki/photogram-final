@@ -50,7 +50,12 @@ class UsersController < ApplicationController
   end
   
  
-  
+  def feed 
+    @list_of_photos = current_user.feed.order(created_at: :desc)
+
+    render(template: "users_html/feed")
+  end
+
   def user_params
     params.require(:user).permit(:username)  # Make sure to permit any user parameters you expect from the form
   end

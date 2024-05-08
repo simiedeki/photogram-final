@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 post("/users/:id/follow", controller: "users", action: "follow")
 post "delete_follow_request", to: "followrequests#delete"
 post '/insert_follow_request', to: 'follow_requests#create'
-
+get 'users/:username/feed', to: 'users#feed'
 
 resources :follow_requests, only: [:create]
 
