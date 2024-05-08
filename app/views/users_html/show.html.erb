@@ -1,14 +1,25 @@
 <h1><%= @the_user.username %></h1>
 
 <dl>
-  <dt>
-    ID
+
+ <dt>
+   Private
   </dt>
   <dd>
-    <%= @the_user.id %>
+    <%= @the_user.private %>
   </dd>
-
-  
+<dt>
+   Followering
+  </dt>
+  <dd>
+    <%= @the_user.leaders.count %>
+  </dd>
+  <dt>
+   Followers
+  </dt>
+  <dd>
+    <%= @the_user.followers.count %>
+  </dd>
 </dl>
 
 <h2>Own photos (<%= @the_user.own_photos.count %>)</h2>
