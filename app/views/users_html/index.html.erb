@@ -38,11 +38,13 @@
           <% follow_request = FollowRequest.find_by(recipient_id: a_user.id, sender_id: current_user.id) %>
           <% if follow_request.nil? || follow_request.status.nil? || follow_request.status == 'rejected' %>
             <%= form_tag("/insert_follow_request", method: "post") do %>
+            
               <input type="hidden" name="query_recipient_id" value="<%= a_user.id %>">
-              <button type="submit">Follow</button>
+              <button type="submit"> Follow </button>
+              Follow
             <% end %>
           <% elsif follow_request.status == 'pending' %>
-            <%= link_to 'Cancel Request', "/delete_follow_request/#{follow_request.id}", method: :get %>
+           Request sent <%= link_to 'Cancel Request', "/delete_follow_request/#{follow_request.id}", method: :get %>
           <% elsif follow_request.status == 'accepted' %>
             <%= link_to 'Unfollow', "/delete_follow_request/#{follow_request.id}", method: :get %>
               <% else %>
